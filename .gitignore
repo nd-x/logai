@@ -38,4 +38,6 @@ dist
 docs/.DS_Store
 /docs/_build/
 /.pytest_cache/
-/logai/.idea/
+.coverage
+/gui/uploaded_files/
+/.claude/settings.local.json
