@@ -47,6 +47,19 @@ export PYTHONPATH='.'
 python3 gui/application.py   # Dash server at http://localhost:8050
 ```
 
+The GUI has a few environment gotchas not covered by `pip install -e ".[gui]"` alone:
+- **Use Python 3.10, not 3.11+.** `logai/dataloader/data_model.py` declares a `@dataclass` field with a
+  `pandas.DataFrame` default. Python's `dataclasses` module added a stricter mutable-default check in 3.11
+  that rejects any unhashable default (not just `list`/`dict`/`set`), so importing the package at all raises
+  `ValueError: mutable default <class 'pandas.DataFrame'> for field ... is not allowed` on 3.11/3.12/3.13.
+- **Also install the `deep-learning` extra**, even though it's documented as optional:
+  `logai/applications/application_interfaces.py` unconditionally imports
+  `logai.analysis.nn_anomaly_detector`, which imports `datasets`/`torch` at module level, so `gui/` fails to
+  import without them (`pip install -e ".[gui,deep-learning]"`).
+- **Pin `dash<3`.** `setup.py` only requires `dash>=2.5.1`, so a fresh install pulls Dash 4.x, but
+  `gui/application.py` calls `app.run_server(...)`, an API removed in Dash 3+. Use
+  `pip install "dash>=2.5.1,<3"` after the editable install.
+
 Build docs (Sphinx):
 ```shell
 cd docs && make clean && make html
