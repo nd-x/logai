@@ -5,8 +5,6 @@
 # For full license text, see the LICENSE file in the repo root or https://opensource.org/licenses/BSD-3-Clause
 #
 #
-import os
-
 import dash
 import pandas as pd
 from dash import html, Input, Output, State, callback, dash_table
@@ -101,7 +99,7 @@ def click_run(
         prop_id = ctx.triggered[0]["prop_id"].split(".")[0]
         if prop_id == "clustering-btn":
             try:
-                file_path = os.path.join(file_manager.base_directory, filename)
+                file_path = file_manager.resolve_safe(filename)
                 clustering_params = log_clustering.parse_parameters(
                     param_info=log_clustering.get_parameter_info(clustering_algo),
                     params={

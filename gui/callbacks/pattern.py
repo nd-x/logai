@@ -5,7 +5,6 @@
 # For full license text, see the LICENSE file in the repo root or https://opensource.org/licenses/BSD-3-Clause
 #
 #
-import os
 import dash
 import pandas as pd
 import plotly.express as px
@@ -116,7 +115,7 @@ def click_run(
             prop_id = ctx.triggered[0]["prop_id"].split(".")[0]
             if prop_id == "pattern-btn":
                 # TODO: Build WorkFlowConfig
-                file_path = os.path.join(file_manager.base_directory, filename)
+                file_path = file_manager.resolve_safe(filename)
                 params = log_pattern_demo.parse_parameters(
                     param_info=log_pattern_demo.get_parameter_info(parsing_algo),
                     params={

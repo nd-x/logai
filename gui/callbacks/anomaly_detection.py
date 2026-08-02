@@ -6,7 +6,6 @@
 #
 #
 import html
-import os
 
 import dash
 import pandas as pd
@@ -107,7 +106,7 @@ def click_run(
                 interval_map = {0: "1s", 1: "1min", 2: "1h", 3: "1d"}
                 freq = interval_map[time_interval]
 
-                file_path = os.path.join(file_manager.base_directory, filename)
+                file_path = file_manager.resolve_safe(filename)
                 ad_params = log_anomaly_demo.parse_parameters(
                     param_info=log_anomaly_demo.get_parameter_info(ad_algo),
                     params={

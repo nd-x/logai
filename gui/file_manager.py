@@ -22,9 +22,16 @@ class FileManager:
         if not os.path.exists(self.directory):
             os.makedirs(self.directory)
 
+    def resolve_safe(self, name):
+        base = os.path.realpath(self.directory)
+        candidate = os.path.realpath(os.path.join(base, name))
+        if os.path.commonpath([base, candidate]) != base:
+            raise ValueError("Invalid file name: {}".format(name))
+        return candidate
+
     def save_file(self, name, content):
         data = content.encode("utf8").split(b";base64,")[1]
-        with open(os.path.join(self.directory, name), "wb") as fp:
+        with open(self.resolve_safe(name), "wb") as fp:
             fp.write(base64.decodebytes(data))
 
     def uploaded_files(self):
