@@ -62,7 +62,7 @@ setup(
         "gensim>=4.1.2",
         "pandas>=1.2.0,<2",
         "numpy>=1.21.4,<1.24",
-        "spacy>=3.2.2",
+        "spacy>=3.2.2,<3.8",
         "attrs>=21.2.0",
         "dataclasses>=0.6",
         "PyYAML>=6.0",
