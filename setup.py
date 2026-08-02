@@ -23,11 +23,11 @@ extras_require = {
     "gui": [
         "dash-bootstrap-components>=1.2.1",
         "plotly>=5.9.0",
-        "dash>=2.5.1",
+        "dash>=2.5.1,<3",
     ],
     "deep-learning": [
         "tokenizers>=0.11.6",
-        "datasets>=1.18.3",
+        "datasets>=1.18.3,<3",
         "torch>=1.10.1",
         "transformers>=4.17.0,<=4.23",
     ],
@@ -39,7 +39,7 @@ extras_require = {
         "build>=0.7.0",
         "jupyter>=1.0.0",
         "ipykernel>=6.19.4",
-        "pytest>=6.2.5",
+        "pytest>=6.2.5,<8",
     ]
 }
 extras_require["all"] = sum(extras_require.values(), [])
@@ -54,15 +54,14 @@ setup(
     author_email="logai@salesforce.com",
     python_requires=">=3.8.0,<4",
     install_requires=[
-        "scikit-learn>=1.2",
+        "scikit-learn>=1.2,<1.4",
         "schema>=0.7.5",
         "salesforce-merlion>=1.0.0",
         "Cython>=0.29.30",
-        "nltk>=3.6.5",
+        "nltk>=3.6.5,<3.9",
         "gensim>=4.1.2",
-        "scikit-learn>=1.0.1",
-        "pandas>=1.2.0",
-        "numpy>=1.21.4",
+        "pandas>=1.2.0,<2",
+        "numpy>=1.21.4,<1.24",
         "spacy>=3.2.2",
         "attrs>=21.2.0",
         "dataclasses>=0.6",
